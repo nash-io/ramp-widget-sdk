@@ -1,49 +1,69 @@
-import { GRAPHQL_API, NASH_CREATE_PURCHASE_URL } from "./constants";
-import { FiatRampRate } from "./types";
+import { envs } from "./constants";
+import { WidgetEnvironment } from "./types";
 
 export default class NashRamp {
-  rates: FiatRampRate[] | undefined;
+  destination: string | undefined;
   referrer: string | undefined;
   redirect: string | undefined;
-  constructor(init: { referrer?: string; redirect?: string }) {
-    this.referrer = init.referrer;
-    this.redirect = init.redirect;
-  }
-  /**
-   * @param  {string} fiatSymbol - The fiat currency used to get the rates (e.g. "EUR")
-   * @returns Promise
-   */
-  async getRates(fiatSymbol: string): Promise<FiatRampRate[] | void> {
-    try {
-      const response = await fetch(GRAPHQL_API, {
-        method: "POST",
-        body: `{\"query\":\"query getRates($fiatSymbol: String) {\\n  fiatRampRatesAndAssets(fiatSymbol: $fiatSymbol, settlementType: PERSONAL_WALLET, side: BUY) {\\n    name\\n    minPurchaseAmount {\\n      amount\\n      currency\\n    }\\n    purchaseFiatPrice {\\n      price {\\n        amount\\n        currencyA\\n        currencyB\\n      }\\n    }\\n    saleFiatPrice {\\n      price {\\n        amount\\n        currencyA\\n        currencyB\\n      }\\n    }\\n  }\\n}\",\"variables\":{\"fiatSymbol\":\"${fiatSymbol}\"},\"operationName\":\"getRates\"}`,
-      });
-      const result = JSON.parse(await response.json());
-      const ratesResult = result.data.fiatRampRatesAndAssets as FiatRampRate[];
-      this.rates = ratesResult;
-      return ratesResult;
-    } catch (e) {
-      console.error("Could not get rates", e);
-    }
-  }
-  /**
-   * @param  {Object} options - Options
-   * @param  {string} options.target - The crypto currency to be purchased (e.g. "BTC")
-   * @param  {string} options.base - The fiat currency used to purchase (e.g. "EUR")
-   * @param  {number} options.amount - The fiat amount to be spent (e.g. 100)
-   * @param  {string} options.destination - The destination where the purchased crytpo will be sent to (e.g. "PERSONAL_WALLET")
-   * @returns string
-   */
-  getPurchaseUrl(options: {
-    target: string;
+  env: WidgetEnvironment | undefined;
+  base: string | undefined;
+  target: string | undefined;
+  constructor(init: {
+    referrer?: string;
+    redirect?: string;
+    env: WidgetEnvironment;
     base: string;
-    amount: number;
+    target: string;
     destination: string;
   }) {
-    const { target, base, amount, destination } = options;
-    return `${NASH_CREATE_PURCHASE_URL}?target=${target}&base=${base}&amount=${amount}&destination=${destination}${
-      this.referrer != null ? `referrer=${this.referrer}` : ""
-    }${this.redirect != null ? `redirect=${encodeURI(this.redirect)}` : ""}`;
+    if (init.target == null) {
+      throw new Error("Please provide the `target` (crypto) parameter");
+    }
+    if (init.base == null) {
+      throw new Error("Please provide the `base` (fiat) parameter");
+    }
+    if (init.destination == null) {
+      throw new Error(
+        "Please provide the `destination` (wallet address) parameter"
+      );
+    }
+    this.referrer = init.referrer;
+    this.redirect = init.redirect;
+    this.env = init.env;
+    this.destination = init.destination;
+    this.base = init.base;
+    this.target = init.target;
+  }
+
+  getIframeUrl(options: {
+    target: string;
+    base: string;
+    destination: string;
+    referrer?: string;
+    redirect?: string;
+  }): string {
+    return `${envs[this.env!]}?fromSdk=true&fiatSymbol=${
+      options.base
+    }&cryptoSymbol=${options.target}&destination=${options.destination}${
+      options.referrer != null ? `&referrer=${options.referrer}` : ""
+    }${
+      options.redirect != null ? `&redirect=${encodeURI(options.redirect)}` : ""
+    }`;
+  }
+  /**
+   * @param  {{width:number;height:number}} options
+   * @param  {number|string} options.width - Element width (e.g. "100%"; 320; "320px")
+   * @param  {number|string} options.height - Element width (e.g. "100%"; 480; "480px")
+   */
+  init(options: { width: number | string; height: number | string }) {
+    const iframeUrl = this.getIframeUrl({
+      target: this.target!,
+      base: this.base!,
+      destination: this.destination!,
+    });
+    const element = document.querySelector(`[data-nash-fiat-ramp]`);
+    if (element != null) {
+      element.innerHTML = `<iframe style="border:0;" src=${iframeUrl} width="${options.width}" height="${options.height}" />`;
+    }
   }
 }

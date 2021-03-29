@@ -12,3 +12,5 @@ export interface FiatRampRate {
     };
   };
 }
+
+export type WidgetEnvironment = "LOCAL" | "PRODUCTION";
