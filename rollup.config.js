@@ -8,7 +8,7 @@ export default [
   {
     input: "src/main.ts",
     output: {
-      name: "howLongUntilLunch",
+      name: "NashRamp",
       file: pkg.browser,
       format: "umd",
     },
