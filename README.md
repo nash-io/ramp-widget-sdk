@@ -4,6 +4,8 @@ A JavaScript library to allow third-parties to include a Nash fiat ramp widget i
 
 The widget is basically a way to calculate rates for buying crypto, and then generate a link to complete the purchase, which leads to the Nash mobile app. The link is either encoded into a QR code in desktops, or turned into a button in mobile devices.
 
+<img src="./screenshot.png" alt="Nash Ramp Widget" width="384"/>
+
 ## Getting started
 
 ### npm module
