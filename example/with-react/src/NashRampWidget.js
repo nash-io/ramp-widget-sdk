@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import NashRamp from "nash-ramp-widget";
+import NashRamp from "@nash-io/ramp-widget-sdk";
 
 const NashRampWidget = ({ env, destination, target, base }) => {
   useEffect(() => {

@@ -1,9 +1,9 @@
 {
-  "name": "nash-ramp-widget",
+  "name": "ramp-widget-sdk",
   "version": "0.0.0",
-  "main": "dist/nash-ramp-widget.cjs.js",
-  "module": "dist/nash-ramp-widget.esm.js",
-  "browser": "dist/nash-ramp-widget.umd.js",
+  "main": "dist/ramp-widget-sdk.cjs.js",
+  "module": "dist/ramp-widget-sdk.esm.js",
+  "browser": "dist/ramp-widget-sdk.umd.js",
   "types": "dist/main.d.ts",
   "author": "Mateus Dal Bianco <mateus@nash.io>",
   "license": "MIT",
