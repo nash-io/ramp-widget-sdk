@@ -1,6 +1,6 @@
 import { envs } from "./constants";
 import { WidgetEnvironment } from "./types";
-
+import closeButton from "./assets/close-button.svg";
 export default class NashRamp {
   destination: string | undefined;
   referrer: string | undefined;
@@ -55,15 +55,33 @@ export default class NashRamp {
    * @param  {number|string} options.width - Element width (e.g. "100%"; 320; "320px")
    * @param  {number|string} options.height - Element width (e.g. "100%"; 480; "480px")
    */
-  init(options: { width: number | string; height: number | string }) {
+  init(options: {
+    width: number | string;
+    height: number | string;
+    onClose?: () => void;
+  }) {
     const iframeUrl = this.getIframeUrl({
       target: this.target!,
       base: this.base!,
       destination: this.destination!,
     });
-    const element = document.querySelector(`[data-nash-fiat-ramp]`);
+    const element = document.querySelector(`[data-nash-fiat-ramp-widget]`);
     if (element != null) {
-      element.innerHTML = `<iframe style="border:0;" src=${iframeUrl} width="${options.width}" height="${options.height}" />`;
+      element.innerHTML = `<div style="position:relative;width:${
+        typeof options.width === "number" ? options.width + "px" : options.width
+      };height:${
+        typeof options.height === "number"
+          ? options.height + "px"
+          : options.height
+      };">${
+        options.onClose != null
+          ? `<button data-nash-fiat-ramp-widget-close-button style="cursor:pointer;background:none;border:0;padding:0;position:absolute;right:16px;top:16px;"><img src="${closeButton}" style="width:24px;height:24px;" /></button>`
+          : ""
+      }<iframe style="border:0;" src=${iframeUrl} width="100%" height="100%" /></div>`;
+      if (options.onClose != null) {
+        const closeButton = document.querySelector(`[data-nash-fiat-ramp]`);
+        closeButton?.addEventListener("click", options.onClose);
+      }
     }
   }
 }
