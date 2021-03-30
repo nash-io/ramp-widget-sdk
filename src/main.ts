@@ -54,6 +54,7 @@ export default class NashRamp {
    * @param  {{width:number;height:number}} options
    * @param  {number|string} options.width - Element width (e.g. "100%"; 320; "320px")
    * @param  {number|string} options.height - Element width (e.g. "100%"; 480; "480px")
+   * @callback onClose - Function to be called when the close button is clicked
    */
   init(options: {
     width: number | string;
