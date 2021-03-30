@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nash Fiat Ramp Widget example</title>
+    <script src="../dist/nash-ramp-widget.umd.js" async></script>
+  </head>
+  <body style="margin: 0">
+    <script>
+      function initializeNash() {
+        const nash = new NashRamp({
+          env: "LOCAL",
+          destination: "0x06e97748AD4E0A36490F92733EF95D8490ffD97f",
+          target: "aave",
+          base: "eur",
+        });
+        nash.init({
+          width: "480px",
+          height: "480px",
+          onClose: () => console.log("close!"),
+        });
+      }
+      window.onload = function () {
+        initializeNash();
+      };
+    </script>
+    <div data-nash-fiat-ramp-widget />
+  </body>
+</html>
