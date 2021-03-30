@@ -1,6 +1,7 @@
 import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
 import typescript from "rollup-plugin-typescript2";
+import svg from "rollup-plugin-svg";
 import pkg from "./package.json";
 
 export default [
@@ -16,6 +17,7 @@ export default [
       resolve(), // so Rollup can find `ms`
       commonjs(), // so Rollup can convert `ms` to an ES module
       typescript(), // so Rollup can convert TypeScript to JavaScript
+      svg({ base64: true }), // so Rollup can load SVGs
     ],
   },
 
@@ -30,6 +32,7 @@ export default [
     external: ["ms"],
     plugins: [
       typescript(), // so Rollup can convert TypeScript to JavaScript
+      svg({ base64: true }), // so Rollup can load SVGs
     ],
     output: [
       { file: pkg.main, format: "cjs" },
