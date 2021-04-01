@@ -11,7 +11,7 @@ export default class NashRamp {
   constructor(init: {
     referrer?: string;
     redirect?: string;
-    env: WidgetEnvironment;
+    env?: WidgetEnvironment;
     base: string;
     target: string;
     destination: string;
@@ -29,7 +29,7 @@ export default class NashRamp {
     }
     this.referrer = init.referrer;
     this.redirect = init.redirect;
-    this.env = init.env;
+    this.env = init.env ?? "PRODUCTION";
     this.destination = init.destination;
     this.base = init.base;
     this.target = init.target;
