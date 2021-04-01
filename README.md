@@ -139,7 +139,7 @@ export default () => (
 
 ## API
 
-### Constructor
+### `new NashRamp({ ...options })`
 
 | Property      | Description                                                                                                               | Type                        | Required | Default        |
 | ------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------- | -------- | -------------- |
@@ -150,7 +150,7 @@ export default () => (
 | `referrer`    | Your service name (will be displayed in the complete purchase step).                                                      | `string`                    | No       | `undefined`    |
 | `target`      | The symbol of the crypto currency to be purchased.                                                                        | `string`                    | Yes      |                |
 
-### `.init()`
+### `NashRamp.init({ ...options })`
 
 | Property  | Description                                                                                                                                                                                                                | Type                 | Required | Default     |
 | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | -------- | ----------- |
