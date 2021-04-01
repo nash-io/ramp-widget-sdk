@@ -36,18 +36,17 @@ import NashRamp from "@nash-io/ramp-widget-sdk";
 
 // initialize the widget
 const nashWidget = new NashRamp({
-  base: "eur", // The symbol of the fiat currency to be used in the purchase.
-  destination: "0x06e97748AD4E0A36490F92733EF95D8490ffD97f", // The wallet address where the purchased crypto should be sent to. Note that this must be valid with the provided `target`.
-  env: "PRODUCTION", // points to the environment where the widget is deployed; either 'LOCAL' or 'PRODUCTION'
-  redirect: "https://example.com", // URL to be redirected after the purchase is complete.
-  referrer: "MyApp", // Your webapp name (will be displayed in the complete purchase step).
-  target: "aave", // The symbol of the crypto currency to be purchased.
+  base: "eur",
+  env: "PRODUCTION",
+  redirect: "https://example.com",
+  referrer: "MyApp",
+  target: "aave",
 });
 
 nashWidget.init({
-  width: 496, // Widget width: any valid CSS value — use 100% for responsiveness
-  height: 480, // Widget height: any valid CSS value — anything under 480px won't work well
-  onClose: () => console.log("close!"), // When provided, a ❌ button will be rendered over the widget. When clicking the ❌, this function is called. Useful if you're rendering the widget within your own modal and want to use this button for closing the modal.
+  width: 496,
+  height: 480,
+  onClose: () => console.log("close!"),
 });
 ```
 
@@ -137,3 +136,24 @@ export default () => (
   <div data-nash-fiat-ramp-widget />
 </body>
 ```
+
+## API
+
+### Constructor
+
+| Property      | Description                                                                                                               | Type                        | Required | Default        |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------- | --------------------------- | -------- | -------------- |
+| `base`        | The symbol of the fiat currency to be used in the purchase.                                                               | `string`                    | Yes      |                |
+| `destination` | The wallet address where the purchased crypto should be sent to. Note that this must be valid with the provided `target`. | `string`                    | Yes      |                |
+| `env`         | Points to the environment where the widget is deployed.                                                                   | `'LOCAL'` \| `'PRODUCTION'` | No       | `'PRODUCTION'` |
+| `redirect`    | URL to be redirected after the purchase is complete.                                                                      | `string`                    | No       | `undefined`    |
+| `referrer`    | Your service name (will be displayed in the complete purchase step).                                                      | `string`                    | No       | `undefined`    |
+| `target`      | The symbol of the crypto currency to be purchased.                                                                        | `string`                    | Yes      |                |
+
+### `.init()`
+
+| Property  | Description                                                                                                                                                                                                                | Type                 | Required | Default     |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | -------- | ----------- |
+| `width`   | Widget width -- use `100%` for responsiveness                                                                                                                                                                              | `string` \| `number` | Yes      |             |
+| `height`  | Widget height -- minimum `480px`                                                                                                                                                                                           | `string` \| `number` | Yes      |             |
+| `onClose` | When provided, a ❌ button will be rendered over the widget. When clicking the ❌, this function is called. Useful if you're rendering the widget within your own modal and want to use this button for closing the modal. | `() => void`         | No       | `undefined` |
