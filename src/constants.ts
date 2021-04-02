@@ -7,5 +7,5 @@ export const NASH_CREATE_PURCHASE_URL =
 
 export const envs: Record<WidgetEnvironment, string> = {
   LOCAL: "http://localhost:3000",
-  PRODUCTION: "http://widget.nash.io",
+  PRODUCTION: "https://buy.nash.io",
 };
