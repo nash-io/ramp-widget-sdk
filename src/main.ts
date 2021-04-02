@@ -4,12 +4,14 @@ import closeButton from "./assets/close-button.svg";
 export default class NashRamp {
   destination: string | undefined;
   referrer: string | undefined;
+  referrerName: string | undefined;
   redirect: string | undefined;
   env: WidgetEnvironment | undefined;
   base: string | undefined;
   target: string | undefined;
   constructor(init: {
     referrer?: string;
+    referrerName?: string;
     redirect?: string;
     env?: WidgetEnvironment;
     base: string;
@@ -27,7 +29,11 @@ export default class NashRamp {
         "Please provide the `destination` (wallet address) parameter"
       );
     }
-    this.referrer = init.referrer;
+    this.referrer =
+      init.referrer ?? typeof window !== "undefined"
+        ? window.location.hostname
+        : undefined;
+    this.referrerName = init.referrer;
     this.redirect = init.redirect;
     this.env = init.env ?? "PRODUCTION";
     this.destination = init.destination;
@@ -40,12 +46,17 @@ export default class NashRamp {
     base: string;
     destination: string;
     referrer?: string;
+    referrerName?: string;
     redirect?: string;
   }): string {
     return `${envs[this.env!]}?fromSdk=true&fiatSymbol=${
       options.base
     }&cryptoSymbol=${options.target}&destination=${options.destination}${
       options.referrer != null ? `&referrer=${options.referrer}` : ""
+    }${
+      options.referrerName != null
+        ? `&referrerName=${options.referrerName}`
+        : ""
     }${
       options.redirect != null ? `&redirect=${encodeURI(options.redirect)}` : ""
     }`;

@@ -141,14 +141,15 @@ export default () => (
 
 ### `new NashRamp({ ...options })`
 
-| Property      | Description                                                                                                               | Type                                  | Required | Default        |
-| ------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | -------- | -------------- |
-| `base`        | The symbol of the fiat currency to be used in the purchase.                                                               | `string`                              | Yes      |                |
-| `destination` | The wallet address where the purchased crypto should be sent to. Note that this must be valid with the provided `target`. | `string`                              | Yes      |                |
-| `env`         | Points to the environment where the widget is deployed.                                                                   | `'LOCAL'`&nbsp;\|&nbsp;`'PRODUCTION'` | No       | `'PRODUCTION'` |
-| `redirect`    | URL to be redirected after the purchase is complete.                                                                      | `string`                              | No       | `undefined`    |
-| `referrer`    | Your service name (will be displayed in the complete purchase step).                                                      | `string`                              | No       | `undefined`    |
-| `target`      | The symbol of the crypto currency to be purchased.                                                                        | `string`                              | Yes      |                |
+| Property       | Description                                                                                                               | Type                                  | Required | Default                    |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | -------- | -------------------------- |
+| `base`         | The symbol of the fiat currency to be used in the purchase.                                                               | `string`                              | Yes      |                            |
+| `destination`  | The wallet address where the purchased crypto should be sent to. Note that this must be valid with the provided `target`. | `string`                              | Yes      |                            |
+| `env`          | Points to the environment where the widget is deployed.                                                                   | `'LOCAL'`&nbsp;\|&nbsp;`'PRODUCTION'` | No       | `'PRODUCTION'`             |
+| `redirect`     | URL to be redirected after the purchase is complete.                                                                      | `string`                              | No       | `undefined`                |
+| `referrer`     | Your service name (used by Nash for tracking).                                                                            | `string`                              | No       | `window.location.hostname` |
+| `referrerName` | Your service name (will be displayed in the complete purchase step).                                                      | `string`                              | No       | `undefined`                |
+| `target`       | The symbol of the crypto currency to be purchased.                                                                        | `string`                              | Yes      |                            |
 
 ### `NashRamp.init({ ...options })`
 
