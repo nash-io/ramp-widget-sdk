@@ -48,12 +48,13 @@ export default class NashRamp {
     referrer?: string;
     referrerName?: string;
     redirect?: string;
+    fiatAmount?: number;
   }): string {
     return `${envs[this.env!]}?fromSdk=true&fiatSymbol=${
       options.base
     }&cryptoSymbol=${options.target}&destination=${options.destination}${
-      options.referrer != null ? `&referrer=${options.referrer}` : ""
-    }${
+      options.fiatAmount != null ? `&fiatAmount=${options.fiatAmount}` : ""
+    }${options.referrer != null ? `&referrer=${options.referrer}` : ""}${
       options.referrerName != null
         ? `&referrerName=${options.referrerName}`
         : ""
@@ -70,12 +71,14 @@ export default class NashRamp {
   init(options: {
     width: number | string;
     height: number | string;
+    fiatAmount?: number;
     onClose?: () => void;
   }) {
     const iframeUrl = this.getIframeUrl({
       target: this.target!,
       base: this.base!,
       destination: this.destination!,
+      fiatAmount,
     });
     const element = document.querySelector(`[data-nash-fiat-ramp-widget]`);
     if (element != null) {
