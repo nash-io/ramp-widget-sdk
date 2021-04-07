@@ -6,10 +6,10 @@ function App() {
   return (
     <div className="App">
       <NashRampWidget
-        env="LOCAL"
+        env="PRODUCTION"
         base="eur"
         target="aave"
-        destination="0x06e97748AD4E0A36490F92733EF95D8490ffD97f"
+        destination="0x0000000000000000000000000000000000000000"
       />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
