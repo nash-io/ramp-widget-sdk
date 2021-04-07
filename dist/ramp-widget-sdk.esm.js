@@ -29,7 +29,7 @@ var NashRamp = /** @class */ (function () {
         this.target = init.target;
     }
     NashRamp.prototype.getIframeUrl = function (options) {
-        return envs[this.env] + "?fromSdk=true&fiatSymbol=" + options.base + "&cryptoSymbol=" + options.target + "&destination=" + options.destination + (options.referrer != null ? "&referrer=" + options.referrer : "") + (options.referrerName != null
+        return envs[this.env] + "?fromSdk=true&fiatSymbol=" + options.base + "&cryptoSymbol=" + options.target + "&destination=" + options.destination + (options.fiatAmount != null ? "&fiatAmount=" + options.fiatAmount : "") + (options.referrer != null ? "&referrer=" + options.referrer : "") + (options.referrerName != null
             ? "&referrerName=" + options.referrerName
             : "") + (options.redirect != null ? "&redirect=" + encodeURI(options.redirect) : "");
     };
@@ -44,6 +44,7 @@ var NashRamp = /** @class */ (function () {
             target: this.target,
             base: this.base,
             destination: this.destination,
+            fiatAmount: options.fiatAmount,
         });
         var element = document.querySelector("[data-nash-fiat-ramp-widget]");
         if (element != null) {
@@ -53,7 +54,7 @@ var NashRamp = /** @class */ (function () {
                 ? "<button data-nash-fiat-ramp-widget-close-button style=\"cursor:pointer;background:none;border:0;padding:0;position:absolute;right:16px;top:16px;\"><img src=\"" + closeButton + "\" style=\"width:24px;height:24px;\" /></button>"
                 : "") + "<iframe style=\"border:0;\" src=" + iframeUrl + " width=\"100%\" height=\"100%\" /></div>";
             if (options.onClose != null) {
-                var closeButton_1 = document.querySelector("[data-nash-fiat-ramp]");
+                var closeButton_1 = document.querySelector("[data-nash-fiat-ramp-widget-close-button]");
                 closeButton_1 === null || closeButton_1 === void 0 ? void 0 : closeButton_1.addEventListener("click", options.onClose);
             }
         }
