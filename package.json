@@ -1,6 +1,6 @@
 {
   "name": "@nash-io/ramp-widget-sdk",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "main": "dist/ramp-widget-sdk.cjs.js",
   "module": "dist/ramp-widget-sdk.esm.js",
   "browser": "dist/ramp-widget-sdk.umd.js",
