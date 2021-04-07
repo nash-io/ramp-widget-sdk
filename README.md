@@ -105,10 +105,7 @@ export default () => (
 
 ```html
 <!-- embed the script -->
-<script
-  src="https://raw.githubusercontent.com/nash-io/fiat-ramp-widget-sdk/main/dist/ramp-widget-sdk.umd.js"
-  async
-></script>
+<script src="https://nash.io/dist/ramp-widget-sdk/v0.1.0/sdk.js" async></script>
 
 <body>
   <!-- initialize -->
