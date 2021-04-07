@@ -94,7 +94,9 @@ export default class NashRamp {
           : ""
       }<iframe style="border:0;" src=${iframeUrl} width="100%" height="100%" /></div>`;
       if (options.onClose != null) {
-        const closeButton = document.querySelector(`[data-nash-fiat-ramp]`);
+        const closeButton = document.querySelector(
+          `[data-nash-fiat-ramp-widget-close-button]`
+        );
         closeButton?.addEventListener("click", options.onClose);
       }
     }
