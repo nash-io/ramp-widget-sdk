@@ -1396,8 +1396,10 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@nash-io/ramp-widget-sdk@file:../..":
-  version "0.0.0"
+"@nash-io/ramp-widget-sdk@^0.1.0":
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/@nash-io/ramp-widget-sdk/-/ramp-widget-sdk-0.1.0.tgz#eada75b7f9c974befbb96ca1121f953d34e1bc38"
+  integrity sha512-iLE+0KzQOs1UESLGwu8EUndPUHtrZ73vRlxCUlFLkFywIxTGa/jo35QhaaZvD2/tBxiRTmdh+xMe5c0XnbsIqg==
 
 "@nodelib/fs.scandir@2.1.4":
   version "2.1.4"
