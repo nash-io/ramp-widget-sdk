@@ -78,7 +78,7 @@ export default class NashRamp {
       target: this.target!,
       base: this.base!,
       destination: this.destination!,
-      fiatAmount,
+      fiatAmount: options.fiatAmount,
     });
     const element = document.querySelector(`[data-nash-fiat-ramp-widget]`);
     if (element != null) {
