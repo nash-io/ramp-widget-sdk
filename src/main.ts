@@ -30,12 +30,14 @@ export default class NashRamp {
       );
     }
     this.referrer =
-      init.referrer ?? typeof window !== "undefined"
+      init.referrer != null
+        ? init.referrer
+        : typeof window !== "undefined"
         ? window.location.hostname
         : undefined;
-    this.referrerName = init.referrer;
+    this.referrerName = init.referrerName;
     this.redirect = init.redirect;
-    this.env = init.env ?? "PRODUCTION";
+    this.env = init.env != null ? init.env : "PRODUCTION";
     this.destination = init.destination;
     this.base = init.base;
     this.target = init.target;
@@ -78,6 +80,9 @@ export default class NashRamp {
       target: this.target!,
       base: this.base!,
       destination: this.destination!,
+      referrer: this.referrer,
+      referrerName: this.referrerName,
+      redirect: this.redirect,
       fiatAmount: options.fiatAmount,
     });
     const element = document.querySelector(`[data-nash-fiat-ramp-widget]`);
