@@ -13,7 +13,6 @@
 
   var NashRamp = /** @class */ (function () {
       function NashRamp(init) {
-          var _a, _b;
           if (init.target == null) {
               throw new Error("Please provide the `target` (crypto) parameter");
           }
@@ -24,12 +23,14 @@
               throw new Error("Please provide the `destination` (wallet address) parameter");
           }
           this.referrer =
-              ((_a = init.referrer) !== null && _a !== void 0 ? _a : typeof window !== "undefined")
-                  ? window.location.hostname
-                  : undefined;
-          this.referrerName = init.referrer;
+              init.referrer != null
+                  ? init.referrer
+                  : typeof window !== "undefined"
+                      ? window.location.hostname
+                      : undefined;
+          this.referrerName = init.referrerName;
           this.redirect = init.redirect;
-          this.env = (_b = init.env) !== null && _b !== void 0 ? _b : "PRODUCTION";
+          this.env = init.env != null ? init.env : "PRODUCTION";
           this.destination = init.destination;
           this.base = init.base;
           this.target = init.target;
@@ -50,6 +51,9 @@
               target: this.target,
               base: this.base,
               destination: this.destination,
+              referrer: this.referrer,
+              referrerName: this.referrerName,
+              redirect: this.redirect,
               fiatAmount: options.fiatAmount,
           });
           var element = document.querySelector("[data-nash-fiat-ramp-widget]");
