@@ -24,7 +24,7 @@ yarn add @nash-io/ramp-widget-sdk
 
 #### Embed
 
-Your page must contain an HTML element with the following data attribute: `data-nash-fiat-ramp-widget`:
+Unless you're using `modal: true`, your page must contain an HTML element with the following data attribute: `data-nash-fiat-ramp-widget`:
 
 ```html
 <div data-nash-fiat-ramp-widget />
