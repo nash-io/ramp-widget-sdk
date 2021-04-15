@@ -136,6 +136,12 @@ export default () => (
 </body>
 ```
 
+### Examples
+
+- React [⛷ Try it on CodeSandbox](https://codesandbox.io/s/crimson-sky-8kppi?file=/pages/index.js)
+- Browser (UMD module) [🏄‍♀️ Try it on CodePen](https://codepen.io/dlbnco/pen/wvgXmwm)
+- Browser (UMD module) — with modal [🏄‍♀️ Try it on CodePen](hhttps://codepen.io/dlbnco/pen/KKaeopb)
+
 ## API
 
 ### `new NashRamp({ ...options })`
