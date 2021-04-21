@@ -1,6 +1,16 @@
-import { envs } from "./constants";
+import {
+  CLOSE_BUTTON_ID,
+  envs,
+  MODAL_ID,
+  TARGET_ELEMENT_DATA_ATTR,
+  IFRAME_ID,
+  IFRAME_WRAPPER_ID,
+  BODY_MODAL_OPEN_CLASS_NAME,
+} from "./constants";
 import { WidgetEnvironment } from "./types";
 import closeButton from "./assets/close-button.svg";
+import getStyles from "./assets/styles";
+import { stringifyQuery } from "./utils";
 export default class NashRamp {
   destination: string | undefined;
   referrer: string | undefined;
@@ -52,17 +62,19 @@ export default class NashRamp {
     redirect?: string;
     fiatAmount?: number;
   }): string {
-    return `${envs[this.env!]}?fromSdk=true&fiatSymbol=${
-      options.base
-    }&cryptoSymbol=${options.target}&destination=${options.destination}${
-      options.fiatAmount != null ? `&fiatAmount=${options.fiatAmount}` : ""
-    }${options.referrer != null ? `&referrer=${options.referrer}` : ""}${
-      options.referrerName != null
-        ? `&referrerName=${options.referrerName}`
-        : ""
-    }${
-      options.redirect != null ? `&redirect=${encodeURI(options.redirect)}` : ""
-    }`;
+    const queryParams: Record<string, any> = {
+      fromSdk: true,
+      fiatSymbol: options.base,
+      cryptoSymbol: options.target,
+      destination: options.destination,
+      referrer: options.referrer,
+      referrerName: options.referrerName,
+      redirect:
+        options.redirect != null ? encodeURI(options.redirect) : undefined,
+    };
+    const origin = envs[this.env!];
+    const query = stringifyQuery(queryParams);
+    return `${origin}?${query}`;
   }
   /**
    * @param  {{width:number;height:number}} options
@@ -73,9 +85,25 @@ export default class NashRamp {
   init(options: {
     width: number | string;
     height: number | string;
+    mobileBreakpoint?: string;
+    modal?: boolean;
     fiatAmount?: number;
     onClose?: () => void;
   }) {
+    // get body
+    const body = document.querySelector("body");
+    if (body == null) {
+      throw new Error("DOM should have a <body />");
+    }
+    // inject styles
+    const style = document.createElement("style");
+    style.innerHTML = getStyles({
+      width: options.width,
+      height: options.height,
+      modal: options.modal,
+    });
+    body.appendChild(style);
+    // get iframe url
     const iframeUrl = this.getIframeUrl({
       target: this.target!,
       base: this.base!,
@@ -85,25 +113,66 @@ export default class NashRamp {
       redirect: this.redirect,
       fiatAmount: options.fiatAmount,
     });
-    const element = document.querySelector(`[data-nash-fiat-ramp-widget]`);
+    /**
+     * If modal option is enabled,
+     * render a full-screen wrapper.
+     */
+    if (options.modal === true) {
+      // inject modal wrapper HTML
+      const modalWrapper = document.createElement("div");
+      modalWrapper.innerHTML = `<div id="${MODAL_ID}"><div ${TARGET_ELEMENT_DATA_ATTR} /></div>`;
+      body.appendChild(modalWrapper);
+      /* add click handler to close modal when clicked outside */
+      modalWrapper.onclick = () => {
+        if (options.onClose != null) {
+          options.onClose();
+        }
+        this.closeModal();
+      };
+      /* add "modal-open" className to body */
+      body.className = `${body.className} ${BODY_MODAL_OPEN_CLASS_NAME}`;
+    }
+    /**
+     * Target element handling:
+     * This is where the iframe is injected.
+     * If `onClose` is provided or `modal === true`, a close button is rendered over the element.
+     */
+    const shouldRenderCloseButton =
+      options.onClose != null || options.modal === true;
+    // get target element
+    const element = document.querySelector(`[${TARGET_ELEMENT_DATA_ATTR}]`);
     if (element != null) {
-      element.innerHTML = `<div style="position:relative;width:${
-        typeof options.width === "number" ? options.width + "px" : options.width
-      };height:${
-        typeof options.height === "number"
-          ? options.height + "px"
-          : options.height
-      };">${
-        options.onClose != null
-          ? `<button data-nash-fiat-ramp-widget-close-button style="cursor:pointer;background:none;border:0;padding:0;position:absolute;right:16px;top:16px;"><img src="${closeButton}" style="width:24px;height:24px;" /></button>`
+      // inject wrapper + iframe + close button
+      element.innerHTML = `<div id="${IFRAME_WRAPPER_ID}">${
+        shouldRenderCloseButton
+          ? `<button id="${CLOSE_BUTTON_ID}"><img src="${closeButton}"/></button>`
           : ""
-      }<iframe style="border:0;" src=${iframeUrl} width="100%" height="100%" /></div>`;
-      if (options.onClose != null) {
-        const closeButton = document.querySelector(
-          `[data-nash-fiat-ramp-widget-close-button]`
-        );
-        closeButton?.addEventListener("click", options.onClose);
+      }<iframe id="${IFRAME_ID}" src=${iframeUrl} width="100%" height="100%" /></div>`;
+      // handle close button click event
+      if (shouldRenderCloseButton) {
+        const closeButton = document.getElementById(CLOSE_BUTTON_ID);
+        if (closeButton != null) {
+          closeButton.onclick = () => {
+            if (options.onClose != null) {
+              options.onClose();
+            }
+            this.closeModal();
+          };
+        }
       }
+    }
+  }
+  closeModal() {
+    const body = document.querySelector("body");
+    if (body != null) {
+      body.className = `${body.className.replace(
+        BODY_MODAL_OPEN_CLASS_NAME,
+        ""
+      )}`;
+    }
+    const modal = document.getElementById(MODAL_ID);
+    if (modal != null) {
+      modal.remove();
     }
   }
 }
