@@ -14,7 +14,7 @@ The widget is basically a way to calculate rates for buying crypto, and then gen
 
 - With React [⛷ Try it on CodeSandbox](https://codesandbox.io/s/crimson-sky-8kppi?file=/pages/index.js)
 - Browser (UMD module) [🏄‍♀️ Try it on CodePen](https://codepen.io/dlbnco/pen/wvgXmwm)
-- Browser (UMD module) — with modal [🏄‍♀️ Try it on CodePen](hhttps://codepen.io/dlbnco/pen/KKaeopb)
+- Browser (UMD module) — with modal [🏄‍♀️ Try it on CodePen](https://codepen.io/dlbnco/pen/KKaeopb)
 
 ### npm module
 
