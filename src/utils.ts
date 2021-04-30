@@ -13,7 +13,7 @@ export const stringifyQuery = (params: Record<string, any>): string =>
 // set vh (viewport height) for better full-height on mobile
 // https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
 export const setCustomVh = (styleOptions: GetStylesProps) => {
-  if (typeof document !== "undefined") {
+  if (typeof document !== "undefined" && typeof window !== "undefined") {
     const customVh = window.innerHeight / 100 + "px";
     const styleEl = document.querySelector(`#${STYLE_ELEMENT_ID}`);
     if (styleEl != null) {
