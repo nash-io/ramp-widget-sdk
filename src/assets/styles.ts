@@ -33,6 +33,7 @@ const getStyles = ({
     left: 0;
     width: 100vw;
     height: 100vh;
+    height: calc(var(${CUSTOM_VH_CSS_VAR}, 1vh) * 100);
     display: flex;
     position: fixed;
     align-items: center;
@@ -78,8 +79,7 @@ const getStyles = ({
       [${TARGET_ELEMENT_DATA_ATTR}], #${IFRAME_WRAPPER_ID} {
         top:0;
         width: 100%;
-        height: 100vh;
-        height: calc(var(${CUSTOM_VH_CSS_VAR}, 1vh) * 100);
+        height: 100%;
         border-radius: 0;
       }
     }
