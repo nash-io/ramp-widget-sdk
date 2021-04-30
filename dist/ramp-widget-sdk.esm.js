@@ -59,7 +59,7 @@ var stringifyQuery = function (params) {
 // set vh (viewport height) for better full-height on mobile
 // https://css-tricks.com/the-trick-to-viewport-units-on-mobile/
 var setCustomVh = function (styleOptions) {
-    if (typeof document !== "undefined") {
+    if (typeof document !== "undefined" && typeof window !== "undefined") {
         var customVh = window.innerHeight / 100 + "px";
         var styleEl = document.querySelector("#" + STYLE_ELEMENT_ID);
         if (styleEl != null) {
