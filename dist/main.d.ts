@@ -35,7 +35,6 @@ export default class NashRamp {
     init(options: {
         width: number | string;
         height: number | string;
-        mobileBreakpoint?: string;
         modal?: boolean;
         fiatAmount?: number;
         onClose?: () => void;
