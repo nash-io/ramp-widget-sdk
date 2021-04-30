@@ -1,6 +1,7 @@
 import {
   BODY_MODAL_OPEN_CLASS_NAME,
   CLOSE_BUTTON_ID,
+  CUSTOM_VH_CSS_VAR,
   IFRAME_ID,
   IFRAME_WRAPPER_ID,
   MOBILE_BREAKPOINT,
@@ -8,13 +9,22 @@ import {
   TARGET_ELEMENT_DATA_ATTR,
 } from "../constants";
 
-interface GetStylesProps {
+export interface GetStylesProps {
   width: number | string;
   height: number | string;
+  customVh?: string;
   modal?: boolean;
 }
 
-const getStyles = ({ width, height, modal }: GetStylesProps) => `
+const getStyles = ({
+  width,
+  height,
+  modal,
+  customVh = "100%",
+}: GetStylesProps) => `
+  :root {
+    ${CUSTOM_VH_CSS_VAR}: ${customVh};
+  }
   body.${BODY_MODAL_OPEN_CLASS_NAME} {
     overflow: hidden;
   }
@@ -67,7 +77,8 @@ const getStyles = ({ width, height, modal }: GetStylesProps) => `
     @media all and (max-width: ${MOBILE_BREAKPOINT}) {
       [${TARGET_ELEMENT_DATA_ATTR}], #${IFRAME_WRAPPER_ID} {
         width: 100%;
-        height: 100%;
+        height: 100vh;
+        height: calc(var(${CUSTOM_VH_CSS_VAR}, 1vh) * 100);
         border-radius: 0;
       }
     }
