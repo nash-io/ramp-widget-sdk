@@ -76,6 +76,7 @@ const getStyles = ({
     }
     @media all and (max-width: ${MOBILE_BREAKPOINT}) {
       [${TARGET_ELEMENT_DATA_ATTR}], #${IFRAME_WRAPPER_ID} {
+        top:0;
         width: 100%;
         height: 100vh;
         height: calc(var(${CUSTOM_VH_CSS_VAR}, 1vh) * 100);
