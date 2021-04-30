@@ -6,11 +6,12 @@ import {
   IFRAME_ID,
   IFRAME_WRAPPER_ID,
   BODY_MODAL_OPEN_CLASS_NAME,
+  STYLE_ELEMENT_ID,
 } from "./constants";
 import { WidgetEnvironment } from "./types";
 import closeButton from "./assets/close-button.svg";
 import getStyles from "./assets/styles";
-import { stringifyQuery } from "./utils";
+import { setCustomVh, stringifyQuery } from "./utils";
 export default class NashRamp {
   destination: string | undefined;
   referrer: string | undefined;
@@ -19,6 +20,8 @@ export default class NashRamp {
   env: WidgetEnvironment | undefined;
   base: string | undefined;
   target: string | undefined;
+  resizeEvent: (() => void) | undefined;
+
   constructor(init: {
     referrer?: string;
     referrerName?: string;
@@ -97,12 +100,17 @@ export default class NashRamp {
     }
     // inject styles
     const style = document.createElement("style");
-    style.innerHTML = getStyles({
+    style.id = STYLE_ELEMENT_ID;
+    const styleProps = {
       width: options.width,
       height: options.height,
       modal: options.modal,
-    });
+    };
+    style.innerHTML = getStyles(styleProps);
     body.appendChild(style);
+    setCustomVh(styleProps);
+    this.resizeEvent = () => setCustomVh(styleProps);
+    this.addWindowHeightListener();
     // get iframe url
     const iframeUrl = this.getIframeUrl({
       target: this.target!,
@@ -162,13 +170,28 @@ export default class NashRamp {
       }
     }
   }
+  addWindowHeightListener() {
+    if (typeof window !== "undefined" && this.resizeEvent != null) {
+      window.addEventListener("resize", this.resizeEvent);
+    }
+  }
+  removeWindowHeightListener() {
+    if (typeof window !== "undefined" && this.resizeEvent != null) {
+      window.removeEventListener("resize", this.resizeEvent);
+    }
+  }
   closeModal() {
+    this.removeWindowHeightListener();
     const body = document.querySelector("body");
+    const style = document.querySelector(`#${STYLE_ELEMENT_ID}`);
     if (body != null) {
       body.className = `${body.className.replace(
         BODY_MODAL_OPEN_CLASS_NAME,
         ""
       )}`;
+    }
+    if (style != null) {
+      style.remove();
     }
     const modal = document.getElementById(MODAL_ID);
     if (modal != null) {
