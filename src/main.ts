@@ -10,7 +10,7 @@ import {
 } from "./constants";
 import { WidgetEnvironment } from "./types";
 import closeButton from "./assets/close-button.svg";
-import getStyles, { GetStylesProps } from "./assets/styles";
+import getStyles from "./assets/styles";
 import { setCustomVh, stringifyQuery } from "./utils";
 export default class NashRamp {
   destination: string | undefined;
