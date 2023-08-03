@@ -10,10 +10,6 @@ export const envs: Record<WidgetEnvironment, string> = {
   PRODUCTION: "https://buy.nash.io",
 };
 
-export const MODAL_ID = "nash-ramp-modal";
-
-export const CLOSE_BUTTON_ID = "nash-fiat-ramp-widget-close-button";
-
 export const IFRAME_WRAPPER_ID = "nash-fiat-ramp-widget-iframe-wrapper";
 
 export const IFRAME_ID = "nash-fiat-ramp-widget-iframe";

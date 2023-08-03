@@ -1,11 +1,9 @@
 import {
   BODY_MODAL_OPEN_CLASS_NAME,
-  CLOSE_BUTTON_ID,
   CUSTOM_VH_CSS_VAR,
   IFRAME_ID,
   IFRAME_WRAPPER_ID,
   MOBILE_BREAKPOINT,
-  MODAL_ID,
   TARGET_ELEMENT_DATA_ATTR,
 } from "../constants";
 
@@ -27,35 +25,6 @@ const getStyles = ({
   }
   body.${BODY_MODAL_OPEN_CLASS_NAME} {
     overflow: hidden;
-  }
-  #${MODAL_ID} {
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    height: calc(var(${CUSTOM_VH_CSS_VAR}, 1vh) * 100);
-    display: flex;
-    position: fixed;
-    align-items: center;
-    justify-content: center;
-    background-color: rgba(27, 31, 47, 0.85);
-  }
-  #${CLOSE_BUTTON_ID} {
-    border: 0;
-    top: 16px;
-    padding: 0;
-    right: 16px;
-    cursor: pointer;
-    background: none;
-    position: absolute;
-    & img {
-      width: 24px;
-      height: 24px;
-    }
-  }
-  #${CLOSE_BUTTON_ID} img {
-    width: 24px;
-    height: 24px;
   }
   #${IFRAME_ID} {
     border: 0;
