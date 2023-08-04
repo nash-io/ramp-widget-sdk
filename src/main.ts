@@ -8,6 +8,9 @@ import {
 import { WidgetEnvironment } from "./types";
 import getStyles from "./assets/styles";
 import { setCustomVh, stringifyQuery } from "./utils";
+
+export { IFRAME_ID }
+
 export default class NashRamp {
   referrer: string | undefined;
   referrerName: string | undefined;
@@ -18,29 +21,23 @@ export default class NashRamp {
   blockchain: string | undefined;
   resizeEvent: (() => void) | undefined;
 
-  constructor(init: {
+  constructor(init?: {
     referrer?: string;
     env?: WidgetEnvironment;
     base?: string;
     target?: string;
     blockchain?: string;
   }) {
-    if (init.target == null) {
-      throw new Error("Please provide the `target` (crypto) parameter");
-    }
-    if (init.base == null) {
-      throw new Error("Please provide the `base` (fiat) parameter");
-    }
     this.referrer =
-      init.referrer != null
+      init?.referrer != null
         ? init.referrer
         : typeof window !== "undefined"
         ? window.location.hostname
         : undefined;
-    this.env = init.env != null ? init.env : "PRODUCTION";
-    this.base = init.base;
-    this.target = init.target;
-    this.blockchain = init.blockchain
+    this.env = init?.env != null ? init.env : "PRODUCTION";
+    this.base = init?.base;
+    this.target = init?.target;
+    this.blockchain = init?.blockchain
   }
 
   getIframeUrl(options: {
