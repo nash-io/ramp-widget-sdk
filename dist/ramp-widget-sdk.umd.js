@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
-  typeof define === 'function' && define.amd ? define(factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.NashRamp = factory());
-}(this, (function () { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+  typeof define === 'function' && define.amd ? define(['exports'], factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.NashRamp = {}));
+}(this, (function (exports) { 'use strict';
 
   var envs = {
       LOCAL: "http://localhost:3000",
@@ -72,22 +72,16 @@
 
   var NashRamp = /** @class */ (function () {
       function NashRamp(init) {
-          if (init.target == null) {
-              throw new Error("Please provide the `target` (crypto) parameter");
-          }
-          if (init.base == null) {
-              throw new Error("Please provide the `base` (fiat) parameter");
-          }
           this.referrer =
-              init.referrer != null
+              (init === null || init === void 0 ? void 0 : init.referrer) != null
                   ? init.referrer
                   : typeof window !== "undefined"
                       ? window.location.hostname
                       : undefined;
-          this.env = init.env != null ? init.env : "PRODUCTION";
-          this.base = init.base;
-          this.target = init.target;
-          this.blockchain = init.blockchain;
+          this.env = (init === null || init === void 0 ? void 0 : init.env) != null ? init.env : "PRODUCTION";
+          this.base = init === null || init === void 0 ? void 0 : init.base;
+          this.target = init === null || init === void 0 ? void 0 : init.target;
+          this.blockchain = init === null || init === void 0 ? void 0 : init.blockchain;
       }
       NashRamp.prototype.getIframeUrl = function (options) {
           var _a;
@@ -160,6 +154,9 @@
       return NashRamp;
   }());
 
-  return NashRamp;
+  exports.IFRAME_ID = IFRAME_ID;
+  exports.default = NashRamp;
+
+  Object.defineProperty(exports, '__esModule', { value: true });
 
 })));

@@ -1,4 +1,6 @@
+import { IFRAME_ID } from "./constants";
 import { WidgetEnvironment } from "./types";
+export { IFRAME_ID };
 export default class NashRamp {
     referrer: string | undefined;
     referrerName: string | undefined;
@@ -8,7 +10,7 @@ export default class NashRamp {
     target: string | undefined;
     blockchain: string | undefined;
     resizeEvent: (() => void) | undefined;
-    constructor(init: {
+    constructor(init?: {
         referrer?: string;
         env?: WidgetEnvironment;
         base?: string;
