@@ -68,7 +68,6 @@ export default class NashRamp {
   init(options: {
     width: number | string;
     height: number | string;
-    modal?: boolean;
   }) {
     // get body
     const body = document.querySelector("body");
@@ -81,7 +80,6 @@ export default class NashRamp {
     const styleProps = {
       width: options.width,
       height: options.height,
-      modal: options.modal,
     };
     style.innerHTML = getStyles(styleProps);
     body.appendChild(style);
