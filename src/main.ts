@@ -46,6 +46,7 @@ export default class NashRamp {
     referrer?: string;
     redirect?: string;
     blockchain?: string;
+    fiatAmount?: number;
   }): string {
     const queryParams: Record<string, any> = {
       fromSdk: true,
@@ -53,8 +54,7 @@ export default class NashRamp {
       cryptoSymbol: options.target,
       blockchain: options.blockchain?.toUpperCase(),
       referrer: options.referrer,
-      redirect:
-        options.redirect != null ? encodeURI(options.redirect) : undefined,
+      fiatAmount: options.fiatAmount,
     };
     const origin = envs[this.env!];
     const query = stringifyQuery(queryParams);
@@ -68,6 +68,7 @@ export default class NashRamp {
   init(options: {
     width: number | string;
     height: number | string;
+    fiatAmount?: number;
   }) {
     // get body
     const body = document.querySelector("body");
@@ -93,11 +94,11 @@ export default class NashRamp {
       referrer: this.referrer,
       redirect: this.redirect,
       blockchain: this.blockchain,
+      fiatAmount: options.fiatAmount,
     });
     /**
      * Target element handling:
      * This is where the iframe is injected.
-     * If `onClose` is provided or `modal === true`, a close button is rendered over the element.
      */
     // get target element
     const element = document.querySelector(`[${TARGET_ELEMENT_DATA_ATTR}]`);
