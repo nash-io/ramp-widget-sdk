@@ -30,7 +30,7 @@ yarn add @nash-io/ramp-widget-sdk
 
 #### Embed
 
-Unless you're using `modal: true`, your page must contain an HTML element with the following data attribute: `data-nash-fiat-ramp-widget`:
+Your page must contain an HTML element with the following data attribute: `data-nash-fiat-ramp-widget`:
 
 ```html
 <div data-nash-fiat-ramp-widget />
@@ -43,18 +43,11 @@ Once initializing the widget like below, an `iframe` pointing to the widget depl
 import NashRamp from "@nash-io/ramp-widget-sdk";
 
 // initialize the widget
-const nashWidget = new NashRamp({
-  base: "eur",
-  env: "PRODUCTION",
-  redirect: "https://example.com",
-  referrer: "MyApp",
-  target: "aave",
-});
+const nashWidget = new NashRamp();
 
 nashWidget.init({
   width: 496,
-  height: 480,
-  onClose: () => console.log("close!"),
+  height: 576,
 });
 ```
 
@@ -66,23 +59,9 @@ The pattern above can be reproduced in a simple React component:
 import React, { useEffect } from "react";
 import NashRamp from "@nash-io/ramp-widget-sdk";
 
-const NashRampWidget = ({
-  base,
-  destination,
-  env,
-  target,
-  redirect,
-  referrer,
-}) => {
+const NashRampWidget = () => {
   useEffect(() => {
-    const nash = new NashRamp({
-      base,
-      destination,
-      env,
-      redirect,
-      referrer,
-      target,
-    });
+    const nash = new NashRamp();
     nash.init({
       width: 496,
       height: 480,
@@ -98,14 +77,7 @@ And then used anywhere:
 
 ```jsx
 export default () => (
-  <NashRampWidget
-    base="eur"
-    destination="0x0000000000000000000000000000000000000000"
-    env="PRODUCTION"
-    redirect="https://example.com/"
-    referrer="MyApp"
-    target="aave"
-  />
+  <NashRampWidget />
 );
 ```
 
@@ -122,18 +94,10 @@ export default () => (
   <!-- initialize -->
   <script>
     function initializeNash() {
-      const nash = new NashRamp({
-        base: "eur",
-        destination: "0x0000000000000000000000000000000000000000",
-        env: "PRODUCTION",
-        redirect: "https://example.com",
-        referrer: "MyApp",
-        target: "aave",
-      });
+      const nash = new NashRamp();
       nash.init({
         width: "480px",
         height: "480px",
-        onClose: () => console.log("close!"),
       });
     }
     window.onload = function () {
@@ -152,11 +116,8 @@ export default () => (
 | Property       | Description                                                                                                               | Type                                  | Required | Default                    |
 | -------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | -------- | -------------------------- |
 | `base`         | The symbol of the fiat currency to be used in the purchase.                                                               | `string`                              | Yes      |                            |
-| `destination`  | The wallet address where the purchased crypto should be sent to. Note that this must be valid with the provided `target`. | `string`                              | Yes      |                            |
 | `env`          | Points to the environment where the widget is deployed.                                                                   | `'LOCAL'`&nbsp;\|&nbsp;`'PRODUCTION'` | No       | `'PRODUCTION'`             |
-| `redirect`     | URL to be redirected after the purchase is complete.                                                                      | `string`                              | No       | `undefined`                |
 | `referrer`     | Your service name (used by Nash for tracking).                                                                            | `string`                              | No       | `window.location.hostname` |
-| `referrerName` | Your service name (will be displayed in the complete purchase step).                                                      | `string`                              | No       | `undefined`                |
 | `target`       | The symbol of the crypto currency to be purchased.                                                                        | `string`                              | Yes      |                            |
 
 ### `NashRamp.init({ ...options })`
@@ -165,6 +126,3 @@ export default () => (
 | ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ | -------- | ----------- |
 | `width`      | Widget width — use `100%` for responsiveness                                                                                                                                                                               | `string`&nbsp;\|&nbsp;`number` | Yes      |             |
 | `height`     | Widget height — minimum `480px`                                                                                                                                                                                            | `string`&nbsp;\|&nbsp;`number` | Yes      |             |
-| `modal`      | If `true`, initializes the widget within a built-in modal                                                                                                                                                                  | `boolean`                      | No       | `undefined` |
-| `fiatAmount` | Initializes the widget with a fixed amount. If used, the widget will skip the initial input step and show only the complete purchase step.                                                                                 | `number`                       | No       | `undefined` |
-| `onClose`    | When provided, a ❌ button will be rendered over the widget. When clicking the ❌, this function is called. Useful if you're rendering the widget within your own modal and want to use this button for closing the modal. | `() => void`                   | No       | `undefined` |
