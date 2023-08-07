@@ -76,9 +76,7 @@ export default NashRampWidget;
 And then used anywhere:
 
 ```jsx
-export default () => (
-  <NashRampWidget />
-);
+export default () => <NashRampWidget />;
 ```
 
 ### Browser (UMD module)
@@ -113,16 +111,17 @@ export default () => (
 
 ### `new NashRamp({ ...options })`
 
-| Property       | Description                                                                                                               | Type                                  | Required | Default                    |
-| -------------- | ------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | -------- | -------------------------- |
-| `base`         | The symbol of the fiat currency to be used in the purchase.                                                               | `string`                              | Yes      |                            |
-| `env`          | Points to the environment where the widget is deployed.                                                                   | `'LOCAL'`&nbsp;\|&nbsp;`'PRODUCTION'` | No       | `'PRODUCTION'`             |
-| `referrer`     | Your service name (used by Nash for tracking).                                                                            | `string`                              | No       | `window.location.hostname` |
-| `target`       | The symbol of the crypto currency to be purchased.                                                                        | `string`                              | Yes      |                            |
+| Property   | Description                                                 | Type                                  | Required | Default                    |
+| ---------- | ----------------------------------------------------------- | ------------------------------------- | -------- | -------------------------- |
+| `base`     | The symbol of the fiat currency to be used in the purchase. | `string`                              | No       |                            |
+| `env`      | Points to the environment where the widget is deployed.     | `'LOCAL'`&nbsp;\|&nbsp;`'PRODUCTION'` | No       | `'PRODUCTION'`             |
+| `referrer` | Your service name (used by Nash for tracking).              | `string`                              | No       | `window.location.hostname` |
+| `target`   | The symbol of the crypto currency to be purchased.          | `string`                              | No       |                            |
 
 ### `NashRamp.init({ ...options })`
 
-| Property     | Description                                                                                                                                                                                                                | Type                           | Required | Default     |
-| ------------ | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ | -------- | ----------- |
-| `width`      | Widget width — use `100%` for responsiveness                                                                                                                                                                               | `string`&nbsp;\|&nbsp;`number` | Yes      |             |
-| `height`     | Widget height — minimum `480px`                                                                                                                                                                                            | `string`&nbsp;\|&nbsp;`number` | Yes      |             |
+| Property     | Description                                                                                                                                | Type                           | Required | Default |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------ | -------- | ------- |
+| `width`      | Widget width — use `100%` for responsiveness                                                                                               | `string`&nbsp;\|&nbsp;`number` | Yes      |         |
+| `height`     | Widget height — minimum `480px`                                                                                                            | `string`&nbsp;\|&nbsp;`number` | Yes      |         |
+| `fiatAmount` | Initializes the widget with a fixed amount. If used, the widget will skip the initial input step and show only the complete purchase step. | `number`                       | No       |         |
