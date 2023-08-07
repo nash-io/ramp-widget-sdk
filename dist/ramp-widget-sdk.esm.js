@@ -6,15 +6,12 @@ var IFRAME_WRAPPER_ID = "nash-fiat-ramp-widget-iframe-wrapper";
 var IFRAME_ID = "nash-fiat-ramp-widget-iframe";
 var TARGET_ELEMENT_DATA_ATTR = "data-nash-fiat-ramp-widget";
 var BODY_MODAL_OPEN_CLASS_NAME = "nash-fiat-ramp-widget__modal-open";
-var MOBILE_BREAKPOINT = "495px";
 var CUSTOM_VH_CSS_VAR = "--nash-fiat-ramp-widget-vh";
 var STYLE_ELEMENT_ID = "nash-fiat-ramp-widget-style-element";
 
 var getStyles = function (_a) {
-    var width = _a.width, height = _a.height, modal = _a.modal, _b = _a.customVh, customVh = _b === void 0 ? "100%" : _b;
-    return "\n  :root {\n    " + CUSTOM_VH_CSS_VAR + ": " + customVh + ";\n  }\n  body." + BODY_MODAL_OPEN_CLASS_NAME + " {\n    overflow: hidden;\n  }\n  #" + IFRAME_ID + " {\n    border: 0;\n  }\n  #" + IFRAME_WRAPPER_ID + " {\n    position: relative;\n    width:" + (typeof width === "number" ? width + "px" : width) + ";\n    height:" + (typeof height === "number" ? height + "px" : height) + ";\n  }\n  " + (modal === true
-        ? "\n    [" + TARGET_ELEMENT_DATA_ATTR + "] {\n      border-radius: 8px;\n      overflow:hidden;\n    }\n    #" + IFRAME_WRAPPER_ID + " {\n      background: white;\n    }\n    @media all and (max-width: " + MOBILE_BREAKPOINT + ") {\n      [" + TARGET_ELEMENT_DATA_ATTR + "], #" + IFRAME_WRAPPER_ID + " {\n        top:0;\n        width: 100%;\n        height: 100%;\n        border-radius: 0;\n      }\n    }\n  "
-        : "") + "\n";
+    var width = _a.width, height = _a.height, _b = _a.customVh, customVh = _b === void 0 ? "100%" : _b;
+    return "\n  :root {\n    " + CUSTOM_VH_CSS_VAR + ": " + customVh + ";\n  }\n  body." + BODY_MODAL_OPEN_CLASS_NAME + " {\n    overflow: hidden;\n  }\n  #" + IFRAME_ID + " {\n    border: 0;\n  }\n  #" + IFRAME_WRAPPER_ID + " {\n    position: relative;\n    width:" + (typeof width === "number" ? width + "px" : width) + ";\n    height:" + (typeof height === "number" ? height + "px" : height) + ";\n  }\n";
 };
 
 /*! *****************************************************************************
@@ -85,7 +82,7 @@ var NashRamp = /** @class */ (function () {
             cryptoSymbol: options.target,
             blockchain: (_a = options.blockchain) === null || _a === void 0 ? void 0 : _a.toUpperCase(),
             referrer: options.referrer,
-            redirect: options.redirect != null ? encodeURI(options.redirect) : undefined,
+            fiatAmount: options.fiatAmount,
         };
         var origin = envs[this.env];
         var query = stringifyQuery(queryParams);
@@ -108,7 +105,6 @@ var NashRamp = /** @class */ (function () {
         var styleProps = {
             width: options.width,
             height: options.height,
-            modal: options.modal,
         };
         style.innerHTML = getStyles(styleProps);
         body.appendChild(style);
@@ -122,11 +118,11 @@ var NashRamp = /** @class */ (function () {
             referrer: this.referrer,
             redirect: this.redirect,
             blockchain: this.blockchain,
+            fiatAmount: options.fiatAmount,
         });
         /**
          * Target element handling:
          * This is where the iframe is injected.
-         * If `onClose` is provided or `modal === true`, a close button is rendered over the element.
          */
         // get target element
         var element = document.querySelector("[" + TARGET_ELEMENT_DATA_ATTR + "]");

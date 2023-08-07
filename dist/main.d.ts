@@ -23,6 +23,7 @@ export default class NashRamp {
         referrer?: string;
         redirect?: string;
         blockchain?: string;
+        fiatAmount?: number;
     }): string;
     /**
      * @param  {{width:number;height:number}} options
@@ -32,7 +33,7 @@ export default class NashRamp {
     init(options: {
         width: number | string;
         height: number | string;
-        modal?: boolean;
+        fiatAmount?: number;
     }): void;
     addWindowHeightListener(): void;
     removeWindowHeightListener(): void;
