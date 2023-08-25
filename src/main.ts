@@ -104,7 +104,7 @@ export default class NashRamp {
     const element = document.querySelector(`[${TARGET_ELEMENT_DATA_ATTR}]`);
     if (element != null) {
       // inject wrapper + iframe + close button
-      element.innerHTML = `<div id="${IFRAME_WRAPPER_ID}"><iframe id="${IFRAME_ID}" src=${iframeUrl} width="100%" height="100%" /></div>`;
+      element.innerHTML = `<div id="${IFRAME_WRAPPER_ID}"><iframe id="${IFRAME_ID}" src=${iframeUrl} width="100%" height="100%" allow="camera" allowfullscreen /></div>`;
     }
   }
   addWindowHeightListener() {
