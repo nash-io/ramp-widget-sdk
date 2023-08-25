@@ -1,6 +1,6 @@
 var envs = {
     LOCAL: "http://localhost:3000",
-    PRODUCTION: "https://buy.preview.nash.io",
+    PRODUCTION: "https://buy-preview.nash.io",
 };
 var IFRAME_WRAPPER_ID = "nash-fiat-ramp-widget-iframe-wrapper";
 var IFRAME_ID = "nash-fiat-ramp-widget-iframe";
@@ -128,7 +128,7 @@ var NashRamp = /** @class */ (function () {
         var element = document.querySelector("[" + TARGET_ELEMENT_DATA_ATTR + "]");
         if (element != null) {
             // inject wrapper + iframe + close button
-            element.innerHTML = "<div id=\"" + IFRAME_WRAPPER_ID + "\"><iframe id=\"" + IFRAME_ID + "\" src=" + iframeUrl + " width=\"100%\" height=\"100%\" /></div>";
+            element.innerHTML = "<div id=\"" + IFRAME_WRAPPER_ID + "\"><iframe id=\"" + IFRAME_ID + "\" src=" + iframeUrl + " width=\"100%\" height=\"100%\" allow=\"camera\" allowfullscreen /></div>";
         }
     };
     NashRamp.prototype.addWindowHeightListener = function () {
