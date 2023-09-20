@@ -108,17 +108,18 @@ export default () => <NashRampWidget />;
 
 ### `new NashRamp({ ...options })`
 
-| Property   | Description                                                 | Type                                  | Required | Default                    |
-| ---------- | ----------------------------------------------------------- | ------------------------------------- | -------- | -------------------------- |
-| `base`     | The symbol of the fiat currency to be used in the purchase. | `string`                              | No       |                            |
-| `env`      | Points to the environment where the widget is deployed.     | `'LOCAL'`&nbsp;\|&nbsp;`'PRODUCTION'` | No       | `'PRODUCTION'`             |
-| `referrer` | Your service name (used by Nash for tracking).              | `string`                              | No       | `window.location.hostname` |
-| `target`   | The symbol of the crypto currency to be purchased.          | `string`                              | No       |                            |
+| Property     | Description                                                 | Type                                                                                                                                              | Required | Default                    |
+| ------------ | ----------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | -------------------------- |
+| `base`       | The symbol of the fiat currency to be used in the purchase. | `string`                                                                                                                                          | No       | n/a                        |
+| `env`        | Points to the environment where the widget is deployed.     | `'LOCAL'`&nbsp;\|&nbsp;`'PRODUCTION'`                                                                                                             | No       | `'PRODUCTION'`             |
+| `referrer`   | Your service name (used by Nash for tracking).              | `string`                                                                                                                                          | No       | `window.location.hostname` |
+| `target`     | The symbol of the crypto currency to be purchased.          | `string`                                                                                                                                          | No       | n/a                        |
+| `blockchain` | The symbol of the network to be used.                       | `'BTC'`&nbsp;\|&nbsp;`'ETH'`&nbsp;\|&nbsp;`'NEO'`&nbsp;\|&nbsp;`'NEO3'`&nbsp;\|&nbsp;`'POLYGON'`&nbsp;\|&nbsp;`'AVAXC'`&nbsp;\|&nbsp;`'ARBITRUM'` | No       | n/a                        |
 
 ### `NashRamp.init({ ...options })`
 
-| Property     | Description                                                                                                                                | Type                           | Required | Default |
-| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------ | -------- | ------- |
-| `width`      | Widget width — use `100%` for responsiveness                                                                                               | `string`&nbsp;\|&nbsp;`number` | Yes      |         |
-| `height`     | Widget height — minimum `480px`                                                                                                            | `string`&nbsp;\|&nbsp;`number` | Yes      |         |
-| `fiatAmount` | Initializes the widget with a fixed amount. If used, the widget will skip the initial input step and show only the complete purchase step. | `number`                       | No       |         |
+| Property     | Description                                                                                                                                | Type                           | Required |
+| ------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------ | -------- |
+| `width`      | Widget width — use `100%` for responsiveness                                                                                               | `string`&nbsp;\|&nbsp;`number` | Yes      |
+| `height`     | Widget height — minimum `576px`                                                                                                            | `string`&nbsp;\|&nbsp;`number` | Yes      |
+| `fiatAmount` | Initializes the widget with a fixed amount. If used, the widget will skip the initial input step and show only the complete purchase step. | `number`                       | No       |
