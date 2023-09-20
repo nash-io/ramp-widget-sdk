@@ -61,7 +61,7 @@ const NashRampWidget = () => {
     const nash = new NashRamp();
     nash.init({
       width: 496,
-      height: 480,
+      height: 576,
     });
   }, []);
   return <div data-nash-fiat-ramp-widget />;
@@ -91,8 +91,8 @@ export default () => <NashRampWidget />;
     function initializeNash() {
       const nash = new NashRamp.default();
       nash.init({
-        width: "480px",
-        height: "480px",
+        width: "496px",
+        height: "576px",
       });
     }
     window.onload = function () {
