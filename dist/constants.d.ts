@@ -2,8 +2,6 @@ import { WidgetEnvironment } from "./types";
 export declare const GRAPHQL_API = "http://app.nash.io/api/graphql";
 export declare const NASH_CREATE_PURCHASE_URL = "https://nash.io/app/create-base-purchase";
 export declare const envs: Record<WidgetEnvironment, string>;
-export declare const MODAL_ID = "nash-ramp-modal";
-export declare const CLOSE_BUTTON_ID = "nash-fiat-ramp-widget-close-button";
 export declare const IFRAME_WRAPPER_ID = "nash-fiat-ramp-widget-iframe-wrapper";
 export declare const IFRAME_ID = "nash-fiat-ramp-widget-iframe";
 export declare const TARGET_ELEMENT_DATA_ATTR = "data-nash-fiat-ramp-widget";

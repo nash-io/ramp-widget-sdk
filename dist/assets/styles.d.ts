@@ -4,5 +4,5 @@ export interface GetStylesProps {
     customVh?: string;
     modal?: boolean;
 }
-declare const getStyles: ({ width, height, modal, customVh, }: GetStylesProps) => string;
+declare const getStyles: ({ width, height, customVh, }: GetStylesProps) => string;
 export default getStyles;

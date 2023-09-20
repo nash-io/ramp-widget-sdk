@@ -7,12 +7,8 @@ export const NASH_CREATE_PURCHASE_URL =
 
 export const envs: Record<WidgetEnvironment, string> = {
   LOCAL: "http://localhost:3000",
-  PRODUCTION: "https://buy.nash.io",
+  PRODUCTION: "https://buy-preview.nash.io",
 };
-
-export const MODAL_ID = "nash-ramp-modal";
-
-export const CLOSE_BUTTON_ID = "nash-fiat-ramp-widget-close-button";
 
 export const IFRAME_WRAPPER_ID = "nash-fiat-ramp-widget-iframe-wrapper";
 
