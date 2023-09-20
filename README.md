@@ -10,8 +10,8 @@ A JavaScript library to allow third-parties to include a Nash fiat ramp widget i
 
 ### Examples
 
-- With React [⛷ Try it on CodeSandbox](https://codesandbox.io/s/crimson-sky-8kppi?file=/pages/index.js)
-- Browser (UMD module) [🏄‍♀️ Try it on CodePen](https://codepen.io/dlbnco/pen/wvgXmwm)
+- With React [⛷ Try it on CodeSandbox](https://codesandbox.io/p/sandbox/admiring-andras-32w2gd)
+- Browser (UMD module) [🏄‍♀️ Try it on CodePen](https://codepen.io/dlbnco/pen/abPEvoV)
 
 ### npm module
 
@@ -89,7 +89,7 @@ export default () => <NashRampWidget />;
   <!-- initialize -->
   <script>
     function initializeNash() {
-      const nash = new NashRamp();
+      const nash = new NashRamp.default();
       nash.init({
         width: "480px",
         height: "480px",
