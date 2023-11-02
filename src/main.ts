@@ -9,8 +9,6 @@ import { WidgetEnvironment } from "./types";
 import getStyles from "./assets/styles";
 import { setCustomVh, stringifyQuery } from "./utils";
 
-export { IFRAME_ID }
-
 export default class NashRamp {
   referrer: string | undefined;
   referrerName: string | undefined;
@@ -46,7 +44,9 @@ export default class NashRamp {
     referrer?: string;
     redirect?: string;
     blockchain?: string;
-    fiatAmount?: number;
+    baseAmount?: number | string;
+    targetAmount?: number | string;
+    mode?: string;
   }): string {
     const queryParams: Record<string, any> = {
       fromSdk: true,
@@ -54,21 +54,28 @@ export default class NashRamp {
       cryptoSymbol: options.target,
       blockchain: options.blockchain?.toUpperCase(),
       referrer: options.referrer,
-      fiatAmount: options.fiatAmount,
+      baseAmount: options.baseAmount,
+      targetAmount: options.targetAmount,
+      mode: options.mode,
     };
     const origin = envs[this.env!];
     const query = stringifyQuery(queryParams);
     return `${origin}?${query}`;
   }
   /**
-   * @param  {{width:number;height:number}} options
+   * @param  {{width:number|string;height:number|string;baseAmount:number|string;targetAmount:number|string;mode:`BUY`|`SELL`;}} options
    * @param  {number|string} options.width - Element width (e.g. "100%"; 320; "320px")
    * @param  {number|string} options.height - Element width (e.g. "100%"; 480; "480px")
+   * @param  {number|string} options.baseAmount - Initializes the widget with a fixed base amount.
+   * @param  {number|string} options.targetAmount - Initializes the widget with a fixed target amount.
+   * @param  {`BUY`|`SELL`} options.mode - Initializes the widget on Buy or Sell mode.
    */
   init(options: {
     width: number | string;
     height: number | string;
-    fiatAmount?: number;
+    baseAmount?: number | string;
+    targetAmount?: number | string;
+    mode?: 'BUY'|'SELL';
   }) {
     // get body
     const body = document.querySelector("body");
@@ -94,7 +101,9 @@ export default class NashRamp {
       referrer: this.referrer,
       redirect: this.redirect,
       blockchain: this.blockchain,
-      fiatAmount: options.fiatAmount,
+      baseAmount: options.baseAmount,
+      targetAmount: options.targetAmount,
+      mode: options.mode,
     });
     /**
      * Target element handling:

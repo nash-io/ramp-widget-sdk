@@ -89,7 +89,7 @@ export default () => <NashRampWidget />;
   <!-- initialize -->
   <script>
     function initializeNash() {
-      const nash = new NashRamp.default();
+      const nash = new NashRamp();
       nash.init({
         width: "496px",
         height: "576px",
@@ -122,4 +122,6 @@ export default () => <NashRampWidget />;
 | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------ | -------- |
 | `width`      | Widget width — use `100%` for responsiveness                                                                                               | `string`&nbsp;\|&nbsp;`number` | Yes      |
 | `height`     | Widget height — minimum `576px`                                                                                                            | `string`&nbsp;\|&nbsp;`number` | Yes      |
-| `fiatAmount` | Initializes the widget with a fixed amount. If used, the widget will skip the initial input step and show only the complete purchase step. | `number`                       | No       |
+| `mode` | Initializes the widget on Buy or Sell mode. | `BUY`\|`SELL`                       | No       |
+| `baseAmount` | Initializes the widget with a fixed base amount. | `number`                       | No       |
+| `targetAmount` | Initializes the widget with a fixed target amount — will take precedence if used with `baseAmount`. | `number`                       | No       |

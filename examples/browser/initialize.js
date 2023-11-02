@@ -10,6 +10,8 @@ function initializeNash() {
   nash.init({
     width: "480px",
     height: "576px",
+    targetAmount: 1234,
+    mode: 'SELL',
   });
 }
 window.onload = function () {
