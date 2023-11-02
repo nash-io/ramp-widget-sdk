@@ -1,5 +1,5 @@
 function initializeNash() {
-  const nash = new NashRamp({
+  const nash = new NashRamp.default({
     base: "eur",
     destination: "0x0000000000000000000000000000000000000000",
     env: "LOCAL",
@@ -10,6 +10,8 @@ function initializeNash() {
   nash.init({
     width: "480px",
     height: "576px",
+    targetAmount: 1234,
+    mode: 'SELL',
   });
 }
 window.onload = function () {
