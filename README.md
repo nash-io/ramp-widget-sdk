@@ -124,4 +124,4 @@ export default () => <NashRampWidget />;
 | `height`     | Widget height — minimum `576px`                                                                                                            | `string`&nbsp;\|&nbsp;`number` | Yes      |
 | `mode` | Initializes the widget with a fixed target amount. | `BUY`\|`SELL`                       | No       |
 | `baseAmount` | Initializes the widget with a fixed base amount. | `number`                       | No       |
-| `targetAmount` | Initializes the widget with a fixed target amount. | `number`                       | No       |
+| `targetAmount` | Initializes the widget with a fixed target amount — will take precedence if used with `baseAmount`. | `number`                       | No       |
