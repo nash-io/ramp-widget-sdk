@@ -23,7 +23,9 @@ export default class NashRamp {
         referrer?: string;
         redirect?: string;
         blockchain?: string;
-        fiatAmount?: number;
+        baseAmount?: number;
+        targetAmount?: number;
+        mode?: string;
     }): string;
     /**
      * @param  {{width:number;height:number}} options
@@ -33,7 +35,9 @@ export default class NashRamp {
     init(options: {
         width: number | string;
         height: number | string;
-        fiatAmount?: number;
+        baseAmount?: number;
+        targetAmount?: number;
+        mode?: 'BUY' | 'SELL';
     }): void;
     addWindowHeightListener(): void;
     removeWindowHeightListener(): void;

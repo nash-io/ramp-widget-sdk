@@ -88,7 +88,9 @@
               cryptoSymbol: options.target,
               blockchain: (_a = options.blockchain) === null || _a === void 0 ? void 0 : _a.toUpperCase(),
               referrer: options.referrer,
-              fiatAmount: options.fiatAmount,
+              baseAmount: options.baseAmount,
+              targetAmount: options.targetAmount,
+              mode: options.mode,
           };
           var origin = envs[this.env];
           var query = stringifyQuery(queryParams);
@@ -124,7 +126,9 @@
               referrer: this.referrer,
               redirect: this.redirect,
               blockchain: this.blockchain,
-              fiatAmount: options.fiatAmount,
+              baseAmount: options.baseAmount,
+              targetAmount: options.targetAmount,
+              mode: options.mode,
           });
           /**
            * Target element handling:
