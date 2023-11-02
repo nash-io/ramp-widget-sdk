@@ -152,4 +152,3 @@ var NashRamp = /** @class */ (function () {
 }());
 
 export default NashRamp;
-export { IFRAME_ID };

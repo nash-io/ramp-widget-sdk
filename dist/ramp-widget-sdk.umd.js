@@ -1,8 +1,8 @@
 (function (global, factory) {
-  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
-  typeof define === 'function' && define.amd ? define(['exports'], factory) :
-  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.NashRamp = {}));
-}(this, (function (exports) { 'use strict';
+  typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory() :
+  typeof define === 'function' && define.amd ? define(factory) :
+  (global = typeof globalThis !== 'undefined' ? globalThis : global || self, global.NashRamp = factory());
+}(this, (function () { 'use strict';
 
   var envs = {
       LOCAL: "http://localhost:3000",
@@ -157,9 +157,6 @@
       return NashRamp;
   }());
 
-  exports.IFRAME_ID = IFRAME_ID;
-  exports.default = NashRamp;
-
-  Object.defineProperty(exports, '__esModule', { value: true });
+  return NashRamp;
 
 })));

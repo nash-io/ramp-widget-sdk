@@ -1,6 +1,4 @@
-import { IFRAME_ID } from "./constants";
 import { WidgetEnvironment } from "./types";
-export { IFRAME_ID };
 export default class NashRamp {
     referrer: string | undefined;
     referrerName: string | undefined;

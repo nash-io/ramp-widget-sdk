@@ -1,5 +1,5 @@
 function initializeNash() {
-  const nash = new NashRamp.default({
+  const nash = new NashRamp({
     base: "eur",
     destination: "0x0000000000000000000000000000000000000000",
     env: "LOCAL",

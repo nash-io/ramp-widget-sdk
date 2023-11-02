@@ -89,7 +89,7 @@ export default () => <NashRampWidget />;
   <!-- initialize -->
   <script>
     function initializeNash() {
-      const nash = new NashRamp.default();
+      const nash = new NashRamp();
       nash.init({
         width: "496px",
         height: "576px",

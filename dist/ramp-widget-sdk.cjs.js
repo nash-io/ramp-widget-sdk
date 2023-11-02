@@ -1,7 +1,5 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
 var envs = {
     LOCAL: "http://localhost:3000",
     PRODUCTION: "https://buy-preview.nash.io",
@@ -155,5 +153,4 @@ var NashRamp = /** @class */ (function () {
     return NashRamp;
 }());
 
-exports.IFRAME_ID = IFRAME_ID;
-exports.default = NashRamp;
+module.exports = NashRamp;

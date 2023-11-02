@@ -9,8 +9,6 @@ import { WidgetEnvironment } from "./types";
 import getStyles from "./assets/styles";
 import { setCustomVh, stringifyQuery } from "./utils";
 
-export { IFRAME_ID }
-
 export default class NashRamp {
   referrer: string | undefined;
   referrerName: string | undefined;
