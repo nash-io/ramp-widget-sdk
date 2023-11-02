@@ -46,8 +46,8 @@ export default class NashRamp {
     referrer?: string;
     redirect?: string;
     blockchain?: string;
-    baseAmount?: number;
-    targetAmount?: number;
+    baseAmount?: number | string;
+    targetAmount?: number | string;
     mode?: string;
   }): string {
     const queryParams: Record<string, any> = {
@@ -75,8 +75,8 @@ export default class NashRamp {
   init(options: {
     width: number | string;
     height: number | string;
-    baseAmount?: number;
-    targetAmount?: number;
+    baseAmount?: number | string;
+    targetAmount?: number | string;
     mode?: 'BUY'|'SELL';
   }) {
     // get body
