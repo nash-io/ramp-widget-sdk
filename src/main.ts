@@ -46,7 +46,9 @@ export default class NashRamp {
     referrer?: string;
     redirect?: string;
     blockchain?: string;
-    fiatAmount?: number;
+    baseAmount?: number;
+    targetAmount?: number;
+    mode?: string;
   }): string {
     const queryParams: Record<string, any> = {
       fromSdk: true,
@@ -54,7 +56,9 @@ export default class NashRamp {
       cryptoSymbol: options.target,
       blockchain: options.blockchain?.toUpperCase(),
       referrer: options.referrer,
-      fiatAmount: options.fiatAmount,
+      baseAmount: options.baseAmount,
+      targetAmount: options.targetAmount,
+      mode: options.mode,
     };
     const origin = envs[this.env!];
     const query = stringifyQuery(queryParams);
@@ -68,7 +72,9 @@ export default class NashRamp {
   init(options: {
     width: number | string;
     height: number | string;
-    fiatAmount?: number;
+    baseAmount?: number;
+    targetAmount?: number;
+    mode?: 'BUY'|'SELL';
   }) {
     // get body
     const body = document.querySelector("body");
@@ -94,7 +100,9 @@ export default class NashRamp {
       referrer: this.referrer,
       redirect: this.redirect,
       blockchain: this.blockchain,
-      fiatAmount: options.fiatAmount,
+      baseAmount: options.baseAmount,
+      targetAmount: options.targetAmount,
+      mode: options.mode,
     });
     /**
      * Target element handling:
