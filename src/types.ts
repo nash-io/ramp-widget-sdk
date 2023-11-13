@@ -1,1 +1,1 @@
-export type WidgetEnvironment = "LOCAL" | "PRODUCTION";
+export type WidgetEnvironment = "LOCAL" | "PREVIEW" | "PRODUCTION";
