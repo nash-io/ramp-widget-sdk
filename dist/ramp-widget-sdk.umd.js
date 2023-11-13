@@ -6,6 +6,7 @@
 
   var envs = {
       LOCAL: "http://localhost:3000",
+      PREVIEW: "https://buy-preview.nash.io",
       PRODUCTION: "https://buy.nash.io",
   };
   var IFRAME_WRAPPER_ID = "nash-fiat-ramp-widget-iframe-wrapper";
